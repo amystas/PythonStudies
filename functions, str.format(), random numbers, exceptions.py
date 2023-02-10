@@ -49,40 +49,44 @@ def hi(**kwargs):
 hi(title="Ms", first='Amy', last='Stas')
 
 # str.format()
-animal = 'cow'
-item = 'moon'
-# print('The ' + animal + ' jumped over the ' + item)
-print('The {} jumped over the {}'.format(animal, item))
-print('The {1} jumped over the {0}'.format(item, animal))  # positional argument
-print('The {animal} jumped over the {item}'.format(item='moon', animal='cow'))  # keyword argument
+def formattingString():
+    animal = 'cow'
+    item = 'moon'
+    # print('The ' + animal + ' jumped over the ' + item)
+    print('The {} jumped over the {}'.format(animal, item))
+    print('The {1} jumped over the {0}'.format(item, animal))  # positional argument
+    print('The {animal} jumped over the {item}'.format(item='moon', animal='cow'))  # keyword argument
 
-text = "The {} jumped over the {}"
-print(text.format(animal, item))
-# padding
-print("Hello my name is {:10}. Nice to meet you".format('Amy'))  # right side
-print("Hello my name is {:>10}. Nice to meet you".format('Amy'))  # left side
-print("Hello my name is {:^10}. Nice to meet you".format('Amy'))  # centre
+    text = "The {} jumped over the {}"
+    print(text.format(animal, item))
+    # padding
+    print("Hello my name is {:10}. Nice to meet you".format('Amy'))  # right side
+    print("Hello my name is {:>10}. Nice to meet you".format('Amy'))  # left side
+    print("Hello my name is {:^10}. Nice to meet you".format('Amy'))  # centre
 
-print('The number is {:.2f}'.format(3.14159))  # limits to 2 digits after dot (also rounds the number)
-print('The number is {:,}'.format(1000))  # adds comma at the thousands place
-print('The number is {:b}'.format(1000))  # displays as binary
-print('The number is {:o}'.format(1000))  # displays as octal number
-print('The number is {:X}'.format(1000))  # displays as hexadecimal
-print('The number is {:e}'.format(1000))  # scientific notation
+    print('The number is {:.2f}'.format(3.14159))  # limits to 2 digits after dot (also rounds the number)
+    print('The number is {:,}'.format(1000))  # adds comma at the thousands place
+    print('The number is {:b}'.format(1000))  # displays as binary
+    print('The number is {:o}'.format(1000))  # displays as octal number
+    print('The number is {:X}'.format(1000))  # displays as hexadecimal
+    print('The number is {:e}'.format(1000))  # scientific notation
+    
 
 # random numbers
-import random
+def randomNumbers():
+    import random
 
-x = random.randint(1, 10)
-y = random.random()
+    x = random.randint(1, 10)
+    y = random.random()
 
-myList = ['rock', 'paper', 'scissors']
-z = random.choice(myList)
+    myList = ['rock', 'paper', 'scissors']
+    z = random.choice(myList)
 
-cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 'J', 'Q', 'K', 'A']
-random.shuffle(cards)
-print(cards)
-print(x, y, z)
+    cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 'J', 'Q', 'K', 'A']
+    random.shuffle(cards)
+    print(cards)
+    print(x, y, z)
+
 
 # exception handling
 keepTrying = True
