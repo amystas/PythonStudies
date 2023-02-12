@@ -15,8 +15,14 @@ class Contact:
             self.company = company
         if phone.isdigit() or phone == '':
             self.phone = phone
-        if changeEmailRegEx(email):
+        else:
+            print('Invalid phone number')
+            self.phone = ''
+        if changeEmailRegEx(email) or email=='':
             self.email = email
+        else:
+            print('Invalid email')
+            self.email = ''
 
     def __str__(self):
         personalData = {
@@ -45,6 +51,22 @@ class Contact:
     def getAsList(self):
         return [self.name, self.surname, self.company, self.phone, self.email]
 
+    def get(self, attribute):
+        match attribute:
+            case 'name':
+                return self.name
+            case 'surname':
+                return self.surname
+            case 'company':
+                return self.company
+            case 'phone':
+                return self.phone
+            case 'email':
+                return self.email
+            case other:
+                print('There is no such attribute')
+            
+
 
 class Contacts:
 
@@ -69,10 +91,21 @@ class Contacts:
             print(givenContact)
         except ValueError:
             print('Contact not found')
+            
+    def searchFor(self, searchingBy, searchedValue):
+        for contact in self.listOfContacts:
+            if contact.get(searchingBy) == searchedValue:
+                print('Contact found')
+                print(contact)
+                return
+        print('Contact not found')
 
     def add(self, givenContact):
         if isinstance(givenContact, Contact):
             self.listOfContacts.append(givenContact)
+            return True
+        else:
+            return False
 
     def pop(self):
         self.listOfContacts.pop()
