@@ -2,7 +2,7 @@ import re
 from tabulate import tabulate
 
 
-def changeEmailRegEx(text):
+def checkEmailRegEx(text):
     emailRegex = re.compile("([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+")
     return re.fullmatch(emailRegex, text)
 
@@ -18,7 +18,7 @@ class Contact:
         else:
             print('Invalid phone number')
             self.phone = ''
-        if changeEmailRegEx(email) or email=='':
+        if checkEmailRegEx(email) or email=='':
             self.email = email
         else:
             print('Invalid email')
@@ -83,6 +83,17 @@ class Contacts:
             return tabulate(listOfItems, headers=theHeader, showindex=True)
         else:
             return "You don't have any contacts yet."
+        
+    def __iter__(self):
+        self.i = 0
+        return self
+    
+    def __next__(self):
+        if self.i >= len(self.listOfContacts):
+            raise StopIteration
+        value = self.listOfContacts[self.i]
+        self.i += 1
+        return value
 
     def searchFor(self, givenContact):
         try:
