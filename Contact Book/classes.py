@@ -99,20 +99,20 @@ class Contacts:
         self.i += 1
         return value
 
-    def searchFor(self, givenContact):
+    def search(self, givenContact):
         try:
-            position = self.listOfContacts.index(givenContact) + 1
-            print('Found at position: ' + str(position) + ' out of ' + str(len(self.listOfContacts)))
-            print(givenContact)
+            position = self.listOfContacts.index(givenContact)
+            print('Found at position: ' + str(position+1) + ' out of ' + str(len(self.listOfContacts)))
+            return position
         except ValueError:
-            print('Contact not found')
+            return None
             
     def searchFor(self, searchingBy, searchedValue):
         for contact in self.listOfContacts:
             if contact.get(searchingBy) == searchedValue:
                 print('Contact found')
                 print(contact)
-                return
+                return contact
         print('Contact not found')
 
     def add(self, givenContact):
@@ -122,8 +122,8 @@ class Contacts:
         else:
             return False
 
-    def pop(self):
-        self.listOfContacts.pop()
+    def pop(self, index = -1):
+        self.listOfContacts.pop(index)
 
     def addAtPosition(self, givenContact, givenIndex):
         self.listOfContacts.insert(givenIndex, givenContact)
