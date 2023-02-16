@@ -10,8 +10,7 @@ def menu():
     print('3) Search for a contact')
     print('4) Load contacts from file')
     print('5) Save as file')
-    print('6) Remove a contact')
-    print('7) Exit')
+    print('6) Exit')
     choice = int(input())
     return choice
 
@@ -48,7 +47,24 @@ def enterContactData():
 def searchForContact():
     searchingBy = input('What do you want to search by?: ').lower()
     searchedValue = input('Enter value: ')
-    return CONTACTS.searchFor(searchingBy, searchedValue)
+    found = CONTACTS.searchFor(searchingBy, searchedValue)
+    if isinstance(found, Contact):
+        print('Options:')
+        print('1) Remove')
+        print('2) Edit')
+        print('3) Mark as favorite')
+        print('4) Exit')
+        choice = int(input())
+        match choice:
+            case 1:
+                index = CONTACTS.search(found)
+                CONTACTS.pop(index)
+                print('Removed!')
+            case 2:
+                pass
+            case 3:
+                return
+    
   
   
 def saveAsFile():
@@ -65,18 +81,9 @@ def saveAsFile():
         data += ' '.join(c.getAsList()) + '\n'
     file.write(data)
     
-def removeContact():
-    print('Firstly, find a contact you want to delete')
-    toRemove = CONTACTS.search(searchForContact())
-    if toRemove != None:
-        ans = input('Are you sure you want to remove the contact? [y/n] ')
-        if ans == 'y':
-            CONTACTS.pop(toRemove)
-            print('Removed!')
-    
     
 action = menu()
-while action != 7:
+while action != 6:
     match action:
         case 1:
             print(CONTACTS)
@@ -88,6 +95,4 @@ while action != 7:
             loadFromFile()
         case 5:
             saveAsFile()
-        case 6:
-            removeContact()
     action = menu()

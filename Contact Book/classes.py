@@ -23,6 +23,7 @@ class Contact:
         else:
             print('Invalid email')
             self.email = ''
+        self.favorite = False
 
     def __str__(self):
         personalData = {
@@ -102,7 +103,7 @@ class Contacts:
     def search(self, givenContact):
         try:
             position = self.listOfContacts.index(givenContact)
-            print('Found at position: ' + str(position+1) + ' out of ' + str(len(self.listOfContacts)))
+            #print('Found at position: ' + str(position+1) + ' out of ' + str(len(self.listOfContacts)))
             return position
         except ValueError:
             return None
