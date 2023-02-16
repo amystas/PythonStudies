@@ -34,6 +34,9 @@ class Contact:
         }
         return tabulate(personalData.items(), tablefmt="simple_grid")
 
+    def __repr__(self):
+        return self.surname
+    
     def setFromList(self, givenList):
         if len(givenList) > 5:
             print('Invalid list')
@@ -77,6 +80,7 @@ class Contacts:
             self.listOfContacts = givenList.copy()
 
     def __str__(self):
+        self.listOfContacts = sorted(self.listOfContacts, key=lambda x: x.surname)
         if self.listOfContacts:
             theHeader = ['NAME', 'SURNAME', 'COMPANY', 'PHONE NUMBER', 'EMAIL ADDRESS']
             listOfItems = [prs.getAsList() for prs in self.listOfContacts]
