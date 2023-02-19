@@ -61,7 +61,12 @@ def searchForContact():
                 CONTACTS.pop(index)
                 print('Removed!')
             case 2:
-                pass
+                editedAttribute = input('What would you like to edit?: ')
+                editedValue = input('Enter value: ')
+                if found.set(editedAttribute, editedValue):
+                    print('The contact has been successfully edited')
+                else:
+                    print('Edit error')
             case 3:
                 pass
             case 4:

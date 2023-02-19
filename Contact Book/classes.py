@@ -23,7 +23,7 @@ class Contact:
         else:
             print('Invalid email')
             self.email = ''
-        self.favorite = False
+        self.isFavorite = False
 
     def __str__(self):
         personalData = {
@@ -69,6 +69,29 @@ class Contact:
                 return self.email
             case other:
                 print('There is no such attribute')
+    
+    def set(self, attribute, value):
+        match attribute:
+            case 'name':
+                self.name = value
+            case 'surname':
+                self.surname = value
+            case 'company':
+                self.company = value
+            case 'phone':
+                if value.isdigit():
+                    self.phone = value
+                else: 
+                    return False
+            case 'email':
+                if checkEmailRegEx(value):
+                    self.email = value
+                else:
+                    return False
+            case other:
+                print('There is no such attribute')
+                return False
+        return True
             
 
 
