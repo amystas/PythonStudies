@@ -92,7 +92,6 @@ class Contact:
                 print('There is no such attribute')
                 return False
         return True
-            
 
 
 class Contacts:
@@ -104,11 +103,24 @@ class Contacts:
             self.listOfContacts = givenList.copy()
 
     def __str__(self):
-        self.listOfContacts = sorted(self.listOfContacts, key=lambda x: x.surname)
         if self.listOfContacts:
             theHeader = ['NAME', 'SURNAME', 'COMPANY', 'PHONE NUMBER', 'EMAIL ADDRESS']
-            listOfItems = [prs.getAsList() for prs in self.listOfContacts]
-            return tabulate(listOfItems, headers=theHeader, showindex=True)
+            
+            listOfFavorites = [prs for prs in self.listOfContacts if prs.isFavorite]
+            if listOfFavorites: 
+                listOfFavorites = sorted(listOfFavorites, key=lambda x: x.surname)
+                listOfFavorites = [prs.getAsList() for prs in listOfFavorites]
+            
+            listOfItems = [prs for prs in self.listOfContacts if prs.isFavorite == False]
+            listOfItems = sorted(listOfItems, key=lambda x: x.surname)
+            listOfItems = [prs.getAsList() for prs in listOfItems]
+            
+            if listOfFavorites:
+                display =  'FAVORITES:\n' + tabulate(listOfFavorites, headers=theHeader, showindex=True) + \
+                '\n\nOTHER:\n' + tabulate(listOfItems, headers=theHeader, showindex=True)
+            else:
+                display = tabulate(listOfItems, headers=theHeader, showindex=True)
+            return display   
         else:
             return "You don't have any contacts yet."
         

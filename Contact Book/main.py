@@ -15,8 +15,9 @@ def menu():
     return choice
 
 
-def loadFromFile():
-    path = input('Enter the path: ')
+def loadFromFile(path = None):
+    if path == None:
+        path = input('Enter the path: ')
     try:
         file = open(path, 'r')
     except FileNotFoundError:
@@ -61,14 +62,20 @@ def searchForContact():
                 CONTACTS.pop(index)
                 print('Removed!')
             case 2:
-                editedAttribute = input('What would you like to edit?: ')
+                editedAttribute = input('What would you like to edit?: ').lower()
                 editedValue = input('Enter value: ')
                 if found.set(editedAttribute, editedValue):
                     print('The contact has been successfully edited')
                 else:
                     print('Edit error')
             case 3:
-                pass
+                if found.isFavorite:
+                    choice = input('The contact is already marked as favorite. Would you like to remove it from favorites? [y/n]: ')
+                    if choice == 'y':
+                        found.isFavorite = False
+                        return
+                found.isFavorite= True
+                print(found.name + ' ' + found.surname + ' added to favorites!')
             case 4:
                 return
     
@@ -88,7 +95,7 @@ def saveAsFile():
         data += ' '.join(c.getAsList()) + '\n'
     file.write(data)
     
-    
+loadFromFile('contactList.txt')
 action = menu()
 while action != 6:
     match action:
