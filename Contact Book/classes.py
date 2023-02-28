@@ -144,11 +144,13 @@ class Contacts:
             return None
             
     def searchFor(self, searchingBy, searchedValue):
+        found = []
         for contact in self.listOfContacts:
             if contact.get(searchingBy) == searchedValue:
-                print('Contact found')
-                print(contact)
-                return contact
+                found.append(contact)
+        if found:
+            print('Contact found')
+            return found
         print('Contact not found')
 
     def add(self, givenContact):
