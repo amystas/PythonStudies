@@ -49,37 +49,38 @@ def searchForContact():
     searchingBy = input('What do you want to search by?: ').lower()
     searchedValue = input('Enter value: ')
     found = CONTACTS.searchFor(searchingBy, searchedValue)
-    for contact in found:
-        if isinstance(contact, Contact):
-            print(contact)
-            print('Options:')
-            print('1) Remove')
-            print('2) Edit')
-            print('3) Mark as favorite')
-            print('4) Exit')
-            choice = int(input())
-            match choice:
-                case 1:
-                    index = CONTACTS.search(contact)
-                    CONTACTS.pop(index)
-                    print('Removed!')
-                case 2:
-                    editedAttribute = input('What would you like to edit?: ').lower()
-                    editedValue = input('Enter value: ')
-                    if contact.set(editedAttribute, editedValue):
-                        print('The contact has been successfully edited')
-                    else:
-                        print('Edit error')
-                case 3:
-                    if contact.isFavorite:
-                        choice = input('The contact is already marked as favorite. Would you like to remove it from favorites? [y/n]: ')
-                        if choice == 'y':
-                            contact.isFavorite = False
-                            continue
-                    contact.isFavorite= True
-                    print(contact.name + ' ' + contact.surname + ' added to favorites!')
-                case 4:
-                    continue
+    if found is not None:
+        for contact in found:
+            if isinstance(contact, Contact):
+                print(contact)
+                print('Options:')
+                print('1) Remove')
+                print('2) Edit')
+                print('3) Mark as favorite')
+                print('4) Exit')
+                choice = int(input())
+                match choice:
+                    case 1:
+                        index = CONTACTS.search(contact)
+                        CONTACTS.pop(index)
+                        print('Removed!')
+                    case 2:
+                        editedAttribute = input('What would you like to edit?: ').lower()
+                        editedValue = input('Enter value: ')
+                        if contact.set(editedAttribute, editedValue):
+                            print('The contact has been successfully edited')
+                        else:
+                            print('Edit error')
+                    case 3:
+                        if contact.isFavorite:
+                            choice = input('The contact is already marked as favorite. Would you like to remove it from favorites? [y/n]: ')
+                            if choice == 'y':
+                                contact.isFavorite = False
+                                continue
+                        contact.isFavorite= True
+                        print(contact.get('name') + ' ' + contact.get('surname') + ' added to favorites!')
+                    case 4:
+                        continue
 
   
   
