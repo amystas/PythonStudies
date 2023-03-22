@@ -23,7 +23,7 @@ class Contact:
         else:
             print('Invalid email')
             self.__email = ''
-        self.__isFavorite = False
+        self.isFavorite = False
 
     def __str__(self):
         personalData = {
@@ -53,7 +53,7 @@ class Contact:
         self.__email = givenList[4]
 
     def getAsList(self):
-        return [self.name, self.__surname, self.__company, self.__phone, self.__email]
+        return [self.__name, self.__surname, self.__company, self.__phone, self.__email]
 
     def get(self, attribute):
         match attribute:
@@ -108,11 +108,11 @@ class Contacts:
             
             listOfFavorites = [prs for prs in self.__listOfContacts if prs.isFavorite]
             if listOfFavorites: 
-                listOfFavorites = sorted(listOfFavorites, key=lambda x: x.surname)
+                listOfFavorites = sorted(listOfFavorites, key=lambda x: x.get('surname'))
                 listOfFavorites = [prs.getAsList() for prs in listOfFavorites]
             
             listOfItems = [prs for prs in self.__listOfContacts if prs.isFavorite == False]
-            listOfItems = sorted(listOfItems, key=lambda x: x.surname)
+            listOfItems = sorted(listOfItems, key=lambda x: x.get('surname'))
             listOfItems = [prs.getAsList() for prs in listOfItems]
             
             if listOfFavorites:
