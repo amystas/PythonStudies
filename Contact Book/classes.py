@@ -151,7 +151,9 @@ class Contacts:
         if found:
             print('Contact found')
             return found
-        print('Contact not found')
+        else:
+            print('Contact not found')
+            return None;
 
     def add(self, givenContact):
         if isinstance(givenContact, Contact):
